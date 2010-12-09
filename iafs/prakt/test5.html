@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<title>test5.htm</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../incl/iafs.css" />
+<script type="text/javascript" src="../incl/visuell.js"></script>
+<script type="text/javascript" src="../incl/dom.js"></script>
+<script type="text/javascript" src="../incl/local.js"></script>
+<script>
+var ID = { editor: 'editor', body: 'body', w3c_textarea: 'fragment' };
+
+
+window.onload = function () {
+  local.init();
+}
+</script>
+</head><body id="body"><noscript>Diese Seite braucht Browser mit aktivierten JavaScript</noscript>
+
+<h1>test5.htm (ECMAScript-Templating)</h1>
+
+<form action="javascript:alert('aktion ausführen?');" onsubmit="return false;"><p>
+
+<a href="javascript:dom.set_string(id.editor,'xxx');" 
+   title="Ein teststring überschreibt den Editor-Inhalt">editor:=teststring </a>
+
+
+<textarea id="editor" rows="30" cols="80" title="Editor-Text"></textarea><br />
+
+
+<a href="javascript:dom.select_string(id.editor);"
+   title="Markiert den gesamten Editor-Text"> editor-select 
+</a>
+<a href="javascript:dom.delete_string(id.editor);dom.select_string(id.editor);"
+  title="Löscht den Editor-Text"> editor-delete
+</a>
+&nbsp;&nbsp;
+<a href="javascript:local.push_item(id.editor,dom.get_string(id.editor));"
+  title=" den Editor-Text"> push:=editor
+</a>
+<a href="javascript:dom.set_string(id.editor,local.pop_item(id.editor));"
+  title="den Editor-Text"> editor:=pop
+</a>
+<a href="javascript:local.delete_item(id.editor);"
+  title="Löscht den Editor-Text"> del pushed/poped
+</a>
+</p>
+</form>
+<a href="javascript:dom.set_string(ID.w3c_textarea,dom.get_string(ID.editor));dom.get_object('w3c_form').submit();"
+   title="Zum Validieren des Editor-Source-Textes wird http://validator.w3.org/#validate_by_input verwendet">w3c-validiere</a>
+
+<form style="display:none;" id='w3c_form' method = "post" enctype = "multipart/form-data" action="http://validator.w3.org/check" target = "_blank">
+ <textarea cols="90" rows="5" name="fragment" id="fragment"></textarea>
+</form>
+
+</form>
+
+</body>
+</html>
