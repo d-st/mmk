@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<title>test3.htm</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=620" />
+<link rel="stylesheet" href="../incl/iafs.css" />
+<script type="text/javascript" src="../incl/visuell.js"></script>
+<script type="text/javascript" src="../incl/dom.js"></script>
+<script type="text/javascript" src="../incl/local.js"></script>
+<script type="text/javascript" src="../incl/debug.js"></script>
+<style type="text/css">
+pre { background: #bbb; color: black;}
+li { border-bottom: 1px solid #a9a9a9; }
+</style>
+<script>
+// Hier kann Javascript-code stehen
+function speichere_lokal() {
+	var form;
+	form = document.getElementById('ta0');
+	local.set_item('test', form.value);
+}
+function lade_lokal() {
+	var value, form;
+	form = document.getElementById('ta0');
+	value = local.get_item('test');
+	form.value = value;
+}
+function esc_settext() {
+	document.getElementById('ta0').value = '<p>\nHallo\n</p>';
+}
+function esc_show() {
+	alert(document.getElementById('ta0').value);
+}
+function esc_encode() {
+	document.getElementById('ta0').value = encodeURIComponent(document.getElementById('ta0').value);
+}
+function esc_decode() {
+	document.getElementById('ta0').value = decodeURIComponent(document.getElementById('ta0').value);
+}
+function esc_preview() {
+	document.getElementById('anzeige').innerHTML = document.getElementById('ta0').value;
+}
+
+var do_re_array = function(s, a) {
+	s = s || '';
+	a = a || [];
+	for(var i=0; i<a.length-1;i+=2)
+		s = s.replace(a[i], a[i+1]);
+	return s;	
+};
+var transform_to_html = function(s) {
+	s = encodeURIComponent(s) || '';
+/*
+	s = s.replace(/%3C/g,'&lt;');
+	s = s.replace(/%3E/g,'&gt;');
+	s = s.replace(/%26/g,'&amp;');
+*/
+	s = do_re_array(s, 
+		[
+		/%0D/g, '',
+		/%0A/g, '</li><li>',
+		/%26/g, '&amp;',
+		/%3E/g, '&gt;',
+		/%3C/g, '&lt;'
+		]);
+	return '<ol><li>'+decodeURIComponent(s)+'</li></ol>';
+};
+
+
+window.onload = function () {
+  visuell.init_all('div', 'none'); //setzt alle div's auf .style.display='none';
+  local.init(); // initialisiert localStorage
+  dom.insert_last_modified(); // schreibt Datum ans Seitenende
+};
+</script>
+</head>
+<body id="body"><noscript>Seite braucht JavaScript</noscript>
+
+
+<h1> test3.htm </h1>
+<p>
+<a href="javascript:visuell.hide_all()"> hide_all() </a>
+<a href="javascript:visuell.show_id('div0')"> show div0 </a>
+<br />
+<a href="javascript:visuell.show_all()"> show_all() </a>
+<a href="javascript:visuell.hide_id('div0')"> hide div0 </a>
+
+</p>
+
+
+<div><h2>Teste debug-Bibliothek</h2>
+<a href="javascript:debug.mit_alert(true)"> debug.mit_alert(true) </a>
+<a href="javascript:debug.mit_alert(false)"> debug.mit_alert(false) </a>
+<a href="javascript:debug.show(dom.get_object('body'))"> debug.show(dom.get_object('body') </a>
+</div>
+
+
+<div><h2>Teste local-Bibliothek</h2>
+<form action="" onsubmit="return false;">
+<textarea id="ta0" rows="10" cols="60" onfocus="debug.show()"></textarea>
+</form>
+<a href="javascript:speichere_lokal()">formdaten speichern</a>
+<a href="javascript:lade_lokal()">formdaten laden</a>
+
+<pre id="anzeige" style="border: 1px solid red;">&nbsp;</pre>
+
+</div>
+
+
+<div><h2>Teste andere Dinge</h2>
+<p>
+<a href="javascript:esc_settext()">text setzen</a>
+<a href="javascript:esc_show()">text anzeigen</a>
+<a href="javascript:esc_encode()">encode</a>
+<a href="javascript:esc_decode()">decode</a>
+<a href="javascript:dom.set_string('ta0', transform_to_html(dom.get_string('ta0')))">html transformation</a>
+<a href="javascript:esc_preview()">preview</a>
+</p>
+</div>
+
+</body>
+</html>

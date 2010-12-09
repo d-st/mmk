@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<title>test4.htm</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=620" />
+<link rel="stylesheet" href="../incl/iafs.css" />
+<script type="text/javascript" src="../incl/visuell.js"></script>
+<script type="text/javascript" src="../incl/dom.js"></script>
+<script type="text/javascript" src="../incl/unicode.js"></script>
+<script>
+window.onload = function () {
+  unicode.show(0x0001, 0x0100);
+}
+</script>
+<style type="text/css">
+#CHARACTER_PAD{
+  clear:both;max-height:450px;overflow:auto;background:#88a;color:#000;
+}
+.unicode{float:left;width:26px;
+  margin:1px;padding:0px;border:1px solid #440;
+  color:#fff;background-color:#224;font:24px/24px Monospace;
+}
+.smallfloat {
+  width: 48%;
+  height: 100px;
+  float: left;
+}
+</style>
+</head>
+<body>
+
+<h1>
+ Virtuelle Unicode-"Tastatur"
+ <span class="small float_right">Woher kommen die Zeichen?</span> 
+</h1>
+
+
+<form action="" onsubmit="return false;">
+<select size="10" onchange="try{eval(this.options[this.selectedIndex].value);this.selectedIndex=0;}catch(e){alert(e);}">
+<option value="void(0)"  title="">Bitte Unicode-Block wählen</option>
+<option value="unicode.show([0x2580,0x259F])">0x2580-0x259F: Blockelemente</option>
+<option value="unicode.show([0x25A0,0x25FF])">0x25A0-0x25FF: Geometrische Formen</option>
+<option value="unicode.show([0x2700,0x27BF])">0x2700-0x27BF: Dingbats</option>
+<option value="unicode.show([0x27C0,0x27EF])">0x27C0-0x27EF: math. Symbole-A</option>
+<option value="unicode.show([0x2190,0x21FF,0x2200,0x22FF,0x2300,0x23E0])">Pfeile</option>
+<option value="unicode.show([0x2700,0x27BF,0xA500,0xA63F])">Dingbats, Vai</option>
+<option value="unicode.show([0x0021,0x007E,0x2200,0x23FF,0x2100,0x214F,0x25A0,0x25FF])">Mathe-Zeichen</option>
+<option value="unicode.show([0x2700,0x27BF,0xA500])">error-test</option>
+</select>
+
+<select size="10" onchange="try{eval(this.options[this.selectedIndex].value);/*this.selectedIndex=0;*/}catch(e){alert(e);}">
+<option value="void(0)"  title="">Bitte Unicode-Block wählen</option>
+<option value="unicode.show([0x0000,0x007F])" title="">0x0000-0x007F: Basis-Lateinisch</option>
+<option value="unicode.show([0x0080,0x00FF])" title="">0x0080-0x00FF: Lateinisch-1, Ergänzung</option>
+<option value="unicode.show([0x0100,0x017F])" title="">0x0100-0x017F: Lateinisch, erweitert-A</option>
+<option value="unicode.show([0x0180,0x024F])" title="">0x0180-0x024F: Lateinisch, erweitert-B</option>
+<option value="unicode.show([0x0250,0x02AF])" title="">0x0250-0x02AF: IPA-Erweiterungen</option>
+<option value="unicode.show([0x02B0,0x02FF])" title="">0x02B0-0x02FF: Spacing Modifier Letters</option>
+<option value="unicode.show([0x0300,0x036F])" title="">0x0300-0x036F: Kombinierende diakritische Zeichen</option>
+<option value="unicode.show([0x0370,0x03FF])" title="">0x0370-0x03FF: Griechisch und Koptisch</option>
+<option value="unicode.show([0x0400,0x04FF])" title="">0x0400-0x04FF: Kyrillisch</option>
+<option value="unicode.show([0x0500,0x052F])" title="">0x0500-0x052F: Kyrillisch, Ergänzung</option>
+<option value="unicode.show([0x0530,0x058F])" title="">0x0530-0x058F: Armenisch</option>
+<option value="unicode.show([0x0590,0x05FF])" title="">0x0590-0x05FF: Hebräisch</option>
+<option value="unicode.show([0x0600,0x06FF])" title="">0x0600-0x06FF: Arabisch</option>
+<option value="unicode.show([0x0700,0x074F])" title="">0x0700-0x074F: Syrisch</option>
+<option value="unicode.show([0x0750,0x077F])" title="">0x0750-0x077F: Arabisch, Ergänzung</option>
+<option value="unicode.show([0x0780,0x07BF])" title="">0x0780-0x07BF: Thaana</option>
+<option value="unicode.show([0x07C0,0x07FF])" title="">0x07C0-0x07FF: N'Ko</option>
+<option value="unicode.show([0x0800,0x083F])" title="">0x0800-0x083F: Samaritanisch</option>
+<option value="unicode.show([0x0840,0x085F])" title="">0x0840-0x085F: Mandäisch</option>
+<option value="unicode.show([0x0900,0x097F])" title="">0x0900-0x097F: Devanagari</option>
+<option value="unicode.show([0x0980,0x09FF])" title="">0x0980-0x09FF: Bengalisch</option>
+<option value="unicode.show([0x0A00,0x0A7F])" title="">0x0A00-0x0A7F: Gurmukhi</option>
+<option value="unicode.show([0x0A80,0x0AFF])" title="">0x0A80-0x0AFF: Gujarati</option>
+<option value="unicode.show([0x0B00,0x0B7F])" title="">0x0B00-0x0B7F: Oriya</option>
+<option value="unicode.show([0x0B80,0x0BFF])" title="">0x0B80-0x0BFF: Tamilisch</option>
+<option value="unicode.show([0x0C00,0x0C7F])" title="">0x0C00-0x0C7F: Telugu</option>
+<option value="unicode.show([0x0C80,0x0CFF])" title="">0x0C80-0x0CFF: Kannada</option>
+<option value="unicode.show([0x0D00,0x0D7F])" title="">0x0D00-0x0D7F: Malayalam</option>
+<option value="unicode.show([0x0D80,0x0DFF])" title="">0x0D80-0x0DFF: Singhalesisch</option>
+<option value="unicode.show([0x0E00,0x0E7F])" title="">0x0E00-0x0E7F: Thailändisch</option>
+<option value="unicode.show([0x0E80,0x0EFF])" title="">0x0E80-0x0EFF: Laotisch</option>
+<option value="unicode.show([0x0F00,0x0FFF])" title="">0x0F00-0x0FFF: Tibetisch</option>
+<option value="unicode.show([0x1000,0x109F])" title="">0x1000-0x109F: Birmanisch</option>
+<option value="unicode.show([0x10A0,0x10FF])" title="">0x10A0-0x10FF: Georgisch</option>
+<option value="unicode.show([0x1100,0x11FF])" title="">0x1100-0x11FF: Hangeul-Jamo</option>
+<option value="unicode.show([0x1200,0x137F])" title="">0x1200-0x137F: Äthiopisch</option>
+<option value="unicode.show([0x1380,0x139F])" title="">0x1380-0x139F: Äthiopisch, Zusatz</option>
+<option value="unicode.show([0x13A0,0x13FF])" title="">0x13A0-0x13FF: Cherokee</option>
+<option value="unicode.show([0x1400,0x167F])" title="">0x1400-0x167F: Vereinheitlichte Silbenzeichen kanadischer Ureinwohner</option>
+<option value="unicode.show([0x1680,0x169F])" title="">0x1680-0x169F: Ogam</option>
+<option value="unicode.show([0x16A0,0x16FF])" title="">0x16A0-0x16FF: Runen</option>
+<option value="unicode.show([0x1700,0x171F])" title="">0x1700-0x171F: Tagalog</option>
+<option value="unicode.show([0x1720,0x173F])" title="">0x1720-0x173F: Hanunóo</option>
+<option value="unicode.show([0x1740,0x175F])" title="">0x1740-0x175F: Buid</option>
+<option value="unicode.show([0x1760,0x177F])" title="">0x1760-0x177F: Tagbanuwa</option>
+<option value="unicode.show([0x1780,0x17FF])" title="">0x1780-0x17FF: Khmer</option>
+<option value="unicode.show([0x1800,0x18AF])" title="">0x1800-0x18AF: Mongolisch</option>
+<option value="unicode.show([0x18B0,0x18FF])" title="">0x18B0-0x18FF: Vereinheitlichte Silbenzeichen kanadischer Ureinwohner, erweitert</option>
+<option value="unicode.show([0x1900,0x194F])" title="">0x1900-0x194F: Limbu</option>
+<option value="unicode.show([0x1950,0x197F])" title="">0x1950-0x197F: Tai Le</option>
+<option value="unicode.show([0x1980,0x19DF])" title="">0x1980-0x19DF: Neu-Tai-Lue</option>
+<option value="unicode.show([0x19E0,0x19FF])" title="">0x19E0-0x19FF: Khmer-Symbole</option>
+<option value="unicode.show([0x1A00,0x1A1F])" title="">0x1A00-0x1A1F: Buginesisch</option>
+<option value="unicode.show([0x1A20,0x1AAF])" title="">0x1A20-0x1AAF: Lanna</option>
+<option value="unicode.show([0x1B00,0x1B7F])" title="">0x1B00-0x1B7F: Balinesisch</option>
+<option value="unicode.show([0x1B80,0x1BBF])" title="">0x1B80-0x1BBF: Sundanesisch</option>
+<option value="unicode.show([0x1BC0,0x1BFF])" title="">0x1BC0-0x1BFF: Batak</option>
+<option value="unicode.show([0x1C00,0x1C4F])" title="">0x1C00-0x1C4F: Lepcha</option>
+<option value="unicode.show([0x1C50,0x1C7F])" title="">0x1C50-0x1C7F: Ol Chiki</option>
+<option value="unicode.show([0x1CD0,0x1CFF])" title="">0x1CD0-0x1CFF: Vedische Erweiterungen</option>
+</select>
+<select size="10" onchange="try{eval(this.options[this.selectedIndex].value);/*this.selectedIndex=0;*/}catch(e){alert(e);}">
+<option value="void(0)"  title="">Bitte Unicode-Block wählen</option>
+<option value="unicode.show([0x1D00,0x1D7F])" title="Phonetische Erweiterungen">0x1D00-0x1D7F: Phonetische Erw.</option>
+<option value="unicode.show([0x1D80,0x1DBF])" title="Phonetische Erweiterungen, Ergänzung">0x1D80-0x1DBF: Phonetische Erw., Erg.</option>
+<option value="unicode.show([0x1DC0,0x1DFF])" title="Kombinierende diakritische Zeichen, Ergänzung">0x1DC0-0x1DFF: Komb. diakritische Z., Erg.</option>
+<option value="unicode.show([0x1E00,0x1EFF])" title="">0x1E00-0x1EFF: Lateinisch, weiterer Zusatz</option>
+<option value="unicode.show([0x1F00,0x1FFF])" title="">0x1F00-0x1FFF: Griechisch, Zusatz</option>
+<option value="unicode.show([0x2000,0x206F])" title="">0x2000-0x206F: Interpunktion, allgemein</option>
+<option value="unicode.show([0x2070,0x209F])" title="">0x2070-0x209F: Hoch- und tiefgestellte Zeichen</option>
+<option value="unicode.show([0x20A0,0x20CF])" title="">0x20A0-0x20CF: Währungszeichen</option>
+<option value="unicode.show([0x20D0,0x20FF])" title="Kombinierende diakritische Zeichen für Symbole">0x20D0-0x20FF: Komb. diakr.Zeichen für Symb.</option>
+<option value="unicode.show([0x2100,0x214F])" title="">0x2100-0x214F: Buchstabenähnliche Symbole</option>
+<option value="unicode.show([0x2150,0x218F])" title="">0x2150-0x218F: Zahlzeichen</option>
+<option value="unicode.show([0x2190,0x21FF])" title="">0x2190-0x21FF: Pfeile</option>
+<option value="unicode.show([0x2200,0x22FF])" title="Mathematische Operatoren">0x2200-0x22FF: Math. Operatoren</option>
+<option value="unicode.show([0x2300,0x23FF])" title="Verschiedene technische Zeichen">0x2300-0x23FF: Versch. technische Zeichen</option>
+<option value="unicode.show([0x2400,0x243F])" title="">0x2400-0x243F: Symbole für Steuerzeichen</option>
+<option value="unicode.show([0x2440,0x245F])" title="">0x2440-0x245F: Optische Zeichenerkennung</option>
+<option value="unicode.show([0x2460,0x24FF])" title="Umschlossene alphanumerische Zeichen">0x2460-0x24FF: Umschl. alphanum. Zeichen</option>
+<option value="unicode.show([0x2500,0x257F])" title="">0x2500-0x257F: Rahmenzeichnung</option>
+<option value="unicode.show([0x2580,0x259F])" title="">0x2580-0x259F: Blockelemente</option>
+<option value="unicode.show([0x25A0,0x25FF])" title="">0x25A0-0x25FF: Geometrische Formen</option>
+<option value="unicode.show([0x2600,0x26FF])" title="">0x2600-0x26FF: Verschiedene Symbole</option>
+<option value="unicode.show([0x2700,0x27BF])" title="">0x2700-0x27BF: Dingbats</option>
+<option value="unicode.show([0x27C0,0x27EF])" title="Verschiedene mathematische Symbole-A">0x27C0-0x27EF: math. Symbole-A</option>
+<option value="unicode.show([0x27F0,0x27FF])" title="">0x27F0-0x27FF: Zusätzliche Pfeile-A</option>
+<option value="unicode.show([0x2800,0x28FF])" title="">0x2800-0x28FF: Braille-Zeichen</option>
+<option value="unicode.show([0x2900,0x297F])" title="">0x2900-0x297F: Zusätzliche Pfeile-B</option>
+<option value="unicode.show([0x2980,0x29FF])" title="Verschiedene mathematische Symbole-B">0x2980-0x29FF: math. Symbole-B</option>
+<option value="unicode.show([0x2A00,0x2AFF])" title="Zusätzliche Mathematische Operatoren">0x2A00-0x2AFF: Zusätzl Math. Op</option>
+<option value="unicode.show([0x2B00,0x2BFF])" title="Verschiedene Symbole und Pfeile">0x2B00-0x2BFF: Versch. Symbole und Pfeile</option>
+<option value="unicode.show([0x2C00,0x2C5F])" title="">0x2C00-0x2C5F: Glagolitisch</option>
+<option value="unicode.show([0x2C60,0x2C7F])" title="">0x2C60-0x2C7F: Lateinisch, erweitert-C</option>
+<option value="unicode.show([0x2C80,0x2CFF])" title="">0x2C80-0x2CFF: Koptisch</option>
+<option value="unicode.show([0x2D00,0x2D2F])" title="">0x2D00-0x2D2F: Georgisch, Ergänzung</option>
+<option value="unicode.show([0x2D30,0x2D7F])" title="">0x2D30-0x2D7F: Tifinagh</option>
+<option value="unicode.show([0x2D80,0x2DDF])" title="">0x2D80-0x2DDF: Äthiopisch, erweitert</option>
+<option value="unicode.show([0x2DE0,0x2DFF])" title="">0x2DE0-0x2DFF: Kyrillisch, erweitert-A</option>
+<option value="unicode.show([0x2E00,0x2E7F])" title="">0x2E00-0x2E7F: Zusätzliche Interpunktion</option>
+<option value="unicode.show([0x2E80,0x2EFF])" title="">0x2E80-0x2EFF: CJK-Radikale, Ergänzung</option>
+<option value="unicode.show([0x2F00,0x2FDF])" title="">0x2F00-0x2FDF: Kangxi-Radikale</option>
+<option value="unicode.show([0x2FF0,0x2FFF])" title="Ideographische Beschreibungszeichen">0x2FF0-0x2FFF: Ideograph. Beschreibungsz.</option>
+<option value="unicode.show([0x3000,0x303F])" title="CJK-Symbole und -Interpunktion">0x3000-0x303F: CJK-Symbole und -Interpunkt.</option>
+<option value="unicode.show([0x3040,0x309F])" title="">0x3040-0x309F: Hiragana</option>
+<option value="unicode.show([0x30A0,0x30FF])" title="">0x30A0-0x30FF: Katakana</option>
+<option value="unicode.show([0x3100,0x312F])" title="">0x3100-0x312F: Bopomofo</option>
+<option value="unicode.show([0x3130,0x318F])" title="">0x3130-0x318F: Hangeul-Jamo, Kompatibilität</option>
+<option value="unicode.show([0x3190,0x319F])" title="">0x3190-0x319F: Kanbun</option>
+<option value="unicode.show([0x31A0,0x31BF])" title="">0x31A0-0x31BF: Bopomofo, erweitert</option>
+<option value="unicode.show([0x31C0,0x31EF])" title="">0x31C0-0x31EF: CJK-Striche</option>
+<option value="unicode.show([0x31F0,0x31FF])" title="Katakana, Phonetische Erweiterungen">0x31F0-0x31FF: Katakana, Phonetische Erw.</option>
+<option value="unicode.show([0x3200,0x32FF])" title="Umschlossene CJK-Zeichen und -Monate">0x3200-0x32FF: Umschl.CJK-Z. und -Monate</option>
+<option value="unicode.show([0x3300,0x33FF])" title="">0x3300-0x33FF: CJK-Kompatibilität</option>
+<option value="unicode.show([0x3400,0x4DBF])" title="Vereinheitlichte CJK-Ideogramme, Erweiterung A">0x3400-0x4DBF: CJK-Ideogramme, Erw. A</option>
+<option value="unicode.show([0x4DC0,0x4DFF])" title="">0x4DC0-0x4DFF: I-Ging-Hexagramme</option>
+<option value="unicode.show([0x4E00,0x9FFF])" title="Vereinheitlichte CJK-Ideogramme">0x4E00-0x9FFF: CJK-Ideogramme</option>
+<option value="unicode.show([0xA000,0xA48F])" title="">0xA000-0xA48F: Yi-Silbenzeichen</option>
+<option value="unicode.show([0xA490,0xA4CF])" title="">0xA490-0xA4CF: Yi-Radikale</option>
+<option value="unicode.show([0xA4D0,0xA4FF])" title="">0xA4D0-0xA4FF: Lisu</option>
+<option value="unicode.show([0xA500,0xA63F])" title="">0xA500-0xA63F: Vai</option>
+<option value="unicode.show([0xA640,0xA69F])" title="">0xA640-0xA69F: Kyrillisch, erweitert-B</option>
+<option value="unicode.show([0xA6A0,0xA6FF])" title="">0xA6A0-0xA6FF: Bamum</option>
+<option value="unicode.show([0xA700,0xA71F])" title="">0xA700-0xA71F: Modifizierende Tonzeichen</option>
+<option value="unicode.show([0xA720,0xA7FF])" title="">0xA720-0xA7FF: Lateinisch, erweitert-D</option>
+<option value="unicode.show([0xA800,0xA82F])" title="">0xA800-0xA82F: Syloti Nagri</option>
+<option value="unicode.show([0xA830,0xA83F])" title="">0xA830-0xA83F: Allgemeine indische Ziffern</option>
+<option value="unicode.show([0xA840,0xA87F])" title="">0xA840-0xA87F: Phagspa</option>
+<option value="unicode.show([0xA880,0xA8DF])" title="">0xA880-0xA8DF: Saurashtra</option>
+<option value="unicode.show([0xA8E0,0xA8FF])" title="">0xA8E0-0xA8FF: Devanagari, erweitert</option>
+<option value="unicode.show([0xA900,0xA92F])" title="">0xA900-0xA92F: Kayah Li</option>
+<option value="unicode.show([0xA930,0xA95F])" title="">0xA930-0xA95F: Rejang</option>
+<option value="unicode.show([0xA960,0xA97F])" title="">0xA960-0xA97F: Hangeul-Jamo, erweitert-A</option>
+<option value="unicode.show([0xA980,0xA9DF])" title="">0xA980-0xA9DF: Javanisch</option>
+<option value="unicode.show([0xAA00,0xAA5F])" title="">0xAA00-0xAA5F: Cham</option>
+<option value="unicode.show([0xAA60,0xAA7F])" title="">0xAA60-0xAA7F: Birmanisch, erweitert-A</option>
+<option value="unicode.show([0xAA80,0xAADF])" title="">0xAA80-0xAADF: Tai Viet</option>
+<option value="unicode.show([0xAB00,0xAB2F])" title="">0xAB00-0xAB2F: Äthiopisch, erweitert-A</option>
+<option value="unicode.show([0xABC0,0xABFF])" title="">0xABC0-0xABFF: Meetei Mayek</option>
+<option value="unicode.show([0xAC00,0xD7AF])" title="">0xAC00-0xD7AF: Hangeul-Silbenzeichen</option>
+<option value="unicode.show([0xD7B0,0xD7FF])" title="">0xD7B0-0xD7FF: Hangeul-Jamo, erweitert-B</option>
+<option value="unicode.show([0xF900,0xFAFF])" title="">0xF900-0xFAFF: CJK-Ideogramme, Kompatibilität</option>
+<option value="unicode.show([0xFB00,0xFB4F])" title="Alphabetische Präsentationsformen">0xFB00-0xFB4F: Alphabetische Präsentationsf.</option>
+<option value="unicode.show([0xFB50,0xFDFF])" title="Arabische Präsentationsformen-">0xFB50-0xFDFF: Arabische Präsentationsf.-A</option>
+<option value="unicode.show([0xFE00,0xFE0F])" title="">0xFE00-0xFE0F: Variantenselektoren</option>
+<option value="unicode.show([0xFE10,0xFE1F])" title="">0xFE10-0xFE1F: Vertikale Formen</option>
+<option value="unicode.show([0xFE20,0xFE2F])" title="Kombinierende halbe diakritische Zeichen">0xFE20-0xFE2F: Komb. halbe diakritische Z.</option>
+<option value="unicode.show([0xFE30,0xFE4F])" title="">0xFE30-0xFE4F: CJK-Kompatibilitätsformen</option>
+<option value="unicode.show([0xFE50,0xFE6F])" title="">0xFE50-0xFE6F: Kleine Formvarianten</option>
+<option value="unicode.show([0xFE70,0xFEFF])" title="Arabische Präsentationsformen-B">0xFE70-0xFEFF: Arabische Präsentationsformen-B</option>
+<option value="unicode.show([0xFF00,0xFFEF])" title="Halbbreite und vollbreite Formen">0xFF00-0xFFEF: Halb- und vollbreite Formen</option>
+<option value="unicode.show([0xFFF0,0xFFFF])" title="">0xFFF0-0xFFFF: Spezielles</option>
+<option value="void(0)" title="0x10000 ...">----------------------------------</option>
+<option value="unicode.show([0x10000,0x1007F])" title="">0x10000-0x1007F: Linear-B-Silbenzeichen</option>
+<option value="unicode.show([0x10080,0x100FF])" title="">0x10080-0x100FF: Linear-B-Ideogramme</option>
+<option value="unicode.show([0x10100,0x1013F])" title="">0x10100-0x1013F: Ägäische Zahlzeichen</option>
+<option value="unicode.show([0x10140,0x1018F])" title="">0x10140-0x1018F: Altgriechische Zahlzeichen</option>
+<option value="unicode.show([0x10190,0x101CF])" title="">0x10190-0x101CF: Alte Symbole</option>
+<option value="unicode.show([0x101D0,0x101FF])" title="">0x101D0-0x101FF: Diskos von Phaistos</option>
+<option value="unicode.show([0x10280,0x1029F])" title="">0x10280-0x1029F: Lykisch</option>
+<option value="unicode.show([0x102A0,0x102DF])" title="">0x102A0-0x102DF: Karisch</option>
+<option value="unicode.show([0x10300,0x1032F])" title="">0x10300-0x1032F: Altitalisch</option>
+<option value="unicode.show([0x10330,0x1034F])" title="">0x10330-0x1034F: Gotisch</option>
+<option value="unicode.show([0x10380,0x1039F])" title="">0x10380-0x1039F: Ugaritisch</option>
+<option value="unicode.show([0x103A0,0x103DF])" title="">0x103A0-0x103DF: Altpersisch</option>
+<option value="unicode.show([0x10400,0x1044F])" title="">0x10400-0x1044F: Mormonen-Alphabet</option>
+<option value="unicode.show([0x10450,0x1047F])" title="">0x10450-0x1047F: Shaw-Alphabet</option>
+<option value="unicode.show([0x10480,0x104AF])" title="">0x10480-0x104AF: Osmanya</option>
+<option value="unicode.show([0x10800,0x1083F])" title="">0x10800-0x1083F: Kyprische Schrift</option>
+<option value="unicode.show([0x10840,0x1085F])" title="">0x10840-0x1085F: Aramäisch</option>
+<option value="unicode.show([0x10900,0x1091F])" title="">0x10900-0x1091F: Phönizisch</option>
+<option value="unicode.show([0x10920,0x1093F])" title="">0x10920-0x1093F: Lydisch</option>
+<option value="unicode.show([0x10A00,0x10A5F])" title="">0x10A00-0x10A5F: Kharoshthi</option>
+<option value="unicode.show([0x10A60,0x10A7F])" title="">0x10A60-0x10A7F: Altsüdarabisch</option>
+<option value="unicode.show([0x10B00,0x10B3F])" title="">0x10B00-0x10B3F: Avestisch</option>
+<option value="unicode.show([0x10B40,0x10B5F])" title="">0x10B40-0x10B5F: Parthisch</option>
+<option value="unicode.show([0x10B60,0x10B7F])" title="">0x10B60-0x10B7F: Pahlavi</option>
+<option value="unicode.show([0x10C00,0x10C4F])" title="">0x10C00-0x10C4F: Alttürkisch (Orchon-Runen)</option>
+<option value="unicode.show([0x10E60,0x10E7F])" title="">0x10E60-0x10E7F: Rumi Ziffernsymbole</option>
+<option value="unicode.show([0x11000,0x1107F])" title="">0x11000-0x1107F: Brahmi</option>
+<option value="unicode.show([0x11080,0x110CF])" title="">0x11080-0x110CF: Kaithi</option>
+<option value="unicode.show([0x12000,0x123FF])" title="">0x12000-0x123FF: Keilschrift</option>
+<option value="unicode.show([0x12400,0x1247F])" title="Keilschrift-Zahlzeichen und -Interpunktion">0x12400-0x1247F: Keilschrift-Zahl/Interpunktion</option>
+<option value="unicode.show([0x13000,0x1342F])" title="">0x13000-0x1342F: Ägyptische Hieroglyphen</option>
+<option value="unicode.show([0x16800,0x16A3F])" title="">0x16800-0x16A3F: Bamum, Ergänzung</option>
+<option value="unicode.show([0x1B000,0x1B0FF])" title="">0x1B000-0x1B0FF: Kana, Ergänzung</option>
+<option value="unicode.show([0x1D000,0x1D0FF])" title="Byzantinische Notenschriftzeichen">0x1D000-0x1D0FF: Byzantinische Notenschrift</option>
+<option value="unicode.show([0x1D100,0x1D1FF])" title="">0x1D100-0x1D1FF: Notenschriftzeichen</option>
+<option value="unicode.show([0x1D200,0x1D24F])" title="Altgriechische Notenschriftzeichen">0x1D200-0x1D24F: Altgriechische Notenschrift</option>
+<option value="unicode.show([0x1D300,0x1D35F])" title="">0x1D300-0x1D35F: Tai-Xuan-Jing-Symbole</option>
+<option value="unicode.show([0x1D360,0x1D37F])" title="">0x1D360-0x1D37F: Zählstabziffern</option>
+<option value="unicode.show([0x1D400,0x1D7FF])" title="Mathematische alphanumerische Symbole">0x1D400-0x1D7FF: Math. alphanume. Symb.</option>
+<option value="unicode.show([0x1F000,0x1F02F])" title="">0x1F000-0x1F02F: Mahjonggsteine</option>
+<option value="unicode.show([0x1F030,0x1F09F])" title="">0x1F030-0x1F09F: Dominosteine</option>
+<option value="unicode.show([0x1F0A0,0x1F0FF])" title="">0x1F0A0-0x1F0FF: Spielkarten</option>
+<option value="unicode.show([0x1F100,0x1F1FF])" title="Zusätzliche umschlossene alphanumerische Zeichen">0x1F100-0x1F1FF: umschl. alphanum. Zeichen</option>
+<option value="unicode.show([0x1F200,0x1F2FF])" title="Zusätzliche umschlossene CJK-Zeichen">0x1F200-0x1F2FF: umschl. CJK-Zeichen</option>
+<option value="unicode.show([0x1F300,0x1F5FF])" title="Verschiedene piktografische Symbole">0x1F300-0x1F5FF: Versch. piktogr. Symb.</option>
+<option value="unicode.show([0x1F600,0x1F64F])" title="">0x1F600-0x1F64F: Smileys</option>
+<option value="unicode.show([0x1F680,0x1F6FF])" title="">0x1F680-0x1F6FF: Verkehrs- und Kartensymbole</option>
+<option value="unicode.show([0x1F700,0x1F77F])" title="">0x1F700-0x1F77F: Alchemistische Symbole</option>
+</select>
+</form>
+
+</select>
+
+<textarea class="smallfloat" onfocus="unicode.select(this)" cols="4" rows="30">area 1 content</textarea>
+<textarea class="smallfloat" onfocus="unicode.select(this)" cols="4" rows="30">area 2 content</textarea>
+</form>
+
+<p id="CHARACTER_PAD" style='clear:both;background:#88a;color:#000;max-height:450px;overflow:auto;'></p>

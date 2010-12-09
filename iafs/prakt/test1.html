@@ -1,0 +1,37 @@
+<title> test1/test1.htm </title>
+<link rel="stylesheet" href="./css/iafs.css" />
+<script>
+
+function show_id(id, that) { hide_all(); document.getElementById(id).style.display = "block"; return false; }
+function hide_id(id, that) { document.getElementById(id).style.display = "none"; return false; }
+function hide_all() { 
+	var divs = document.getElementsByTagName("div");
+	for (var i=0; i<divs.length; i++)
+		divs[i].style.display = "none";
+}
+
+window.onload = function () {
+	show_id('div10',this);
+}
+</script>
+
+<h1>Menü:</h1>
+<a href="javascript:void(0)" onclick="show_id('div10',this);">zeige div10</a>
+<a href="javascript:void(0)" onclick="hide_id('div10',this);">verberge div10</a>
+<a href="javascript:void(0)" onclick="show_id('div20',this);">zeige div20</a>
+<a href="javascript:void(0)" onclick="hide_id('div20',this);">verberge div20</a>
+
+<h1>Ausgewählt wurde ...</h1>
+
+
+<div id="div10" style="display:none"><h2>div10</h2><pre>
+<form action="" onsubmit="return false;">
+<textarea id="ta10" cols="80" rows="5">Dies ist id="ta10"</textarea>
+</form></pre></div>
+
+
+<div id="div20" style="display:none"><h2>div20</h2><pre>
+<form action="" onsubmit="return false;">
+<textarea id="ta20" cols="80" rows="5">Dies ist id="ta20"</textarea>
+</form></pre></div>
+
