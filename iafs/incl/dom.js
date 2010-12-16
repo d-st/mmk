@@ -1,66 +1,144 @@
 ﻿var dom = (function (win, doc) { //privat
+    /* http://msdn.microsoft.com/en-us/scriptjunkie/ff696765.aspx  */
 
-    function create(tn, d) {
-        d = d || doc;
-        return d.createElement(tn);
+
+/*  ???
+doc.dir = 'ltr';
+if (('' + win.location).indexOf('http') !== -1) {doc.domain = 'localhost';} 
+
+
+    ===
+    // Evalulates a script in a global context
+    global_eval= function( data ) {
+    if ( data && /\S/.test(data) ) {
+
+    // Inspired by code by Andrea Giammarchi
+    // http://webreflection.blogspot.com/2007/08/global-scope-evaluation-and-dom.html
+
+    var head = document.getElementsByTagName("head")[0] || document.documentElement,
+    script = document.createElement("script");
+    script.type = "text/javascript";
+
+    if ( jQuery.support.scriptEval ) {
+    script.appendChild( document.createTextNode(data));
+    } else {//IE  rmsie = /(msie) ([\w.]+)/    rmsie.exec(navigator.userAgent) 
+    script.text = data;
     }
 
-    function text(str, d) {
-        d = d || doc;
-        return d.createTextNode(str);
+    // Use insertBefore instead of appendChild to circumvent an IE6 bug.
+    // This arises when a base node is used (#2709).
+    head.insertBefore( script, head.firstChild );
+    head.removeChild( script );
     }
+    },
 
-    function attr(o, prop, val) {
-        o.setAttribute(prop, val);
+    */
+    var root_node = document.body,
+        get_childs = function walk(node, fn) {
+            fn(node);
+            node = node.firstChild;
+            while (node) {
+                walk(node, fn);
+                node = node.nextSibling;
+            }
+        },
+
+        getElementsByAttribute = function (att, val) {
+            var r = [];
+            get_childs(root_node, function (node) {
+                var akt = node.nodeType === 1 && node.getAttribute(att);
+                if (typeof akt === 'string' && (akt === val || typeof val !== 'string')) {
+                    r.push(node);
+                }
+            });
+            return r;
+        },
+
+
+        create = function (tagName, d) {
+            d = d || doc;
+            return d.createElement(tagName);
+        },
+        text = function (str, d) {
+            d = d || doc;
+            return d.createTextNode(str);
+        },
+        attr = function (o, prop, val) {
+            o.setAttribute(prop, val);
+            return o;
+        },
+        append = function (o, childobj) {
+            o.appendChild(childobj);
+            return o;
+        };
+    remove_childs = function (o) {
+        while (o.firstChild) {
+            o.removeChild(o.firstChild);
+        }
         return o;
-    }
-
-    function append(o, childobj) {
-        o.appendChild(childobj);
-        return o;
-    }
+    };
+/* noch nicht getestet
+    remove = function (o) {var p=null; if ( o !== null ) { p=o.parentNode; p.removeChild(o); } return p;}
+    */
 
     return { //public
         exist: function (id) {
-            if (doc.getElementById(id) === null) { 
-                // alert('ERR: get_object(' + id + '???)');
+            if (doc.getElementById(id) === null) {
+                alert('ERR: get_object(' + id + '???)');
                 return false;
             }
             return true;
         },
+
         get_object: function (id) {
             if (!dom.exist(id)) {
                 return null;
             }
             return doc.getElementById(id);
         },
+
         get_string: function (id) {
             if (!dom.exist(id)) {
                 return '';
             }
             return doc.getElementById(id).value;
         },
+
         set_string: function (id, str) {
-            if (!dom.exist(id)) {
+            if (!dom.exist(id) || str === null) {
                 return;
             }
             doc.getElementById(id).value = str;
         },
+
         select_string: function (id) {
             if (!dom.exist(id)) {
                 return;
             }
             doc.getElementById(id).select();
         },
-        delete_string: function (id) {
+
+        set_focus: function (id) {
             if (!dom.exist(id)) {
                 return;
             }
-            doc.getElementById(id).value = '';
+            doc.getElementById(id).focus();
         },
 
+        insert_options: function (id, arr, fn) {
+            var i, ii, opt;
+            arr = arr || [];
+            ii = arr.length - 1;
+            remove_childs(doc.getElementById(id), 'option');
+            for (i = 0; i < ii; i += 2) {
+                opt = document.createElement("option"); //t.value='"'+arr[i]+'"'; t.innerHTML = arr[i]+" "+arr[i + 1];
+                opt = attr(opt, 'value', arr[i]); // füge dem option-Tag value=arr[i] hinzu
+                opt = append(opt, text(arr[i + 1])); // füge dem option-Tag erzeugten text(arr[i + 1]) als innerHTML hinzu
+                append(doc.getElementById(id), opt); // füge select-id-Tag das option-Tag hinzu
+            }
+        },
 
-        //dom.insert_last_modified();
+        //unter window.onload=function(){dom.insert_last_modified();}
         insert_last_modified: function () {
             var p, span, a, url, t = new Date(doc.lastModified),
                 m = t.getMinutes(),
@@ -86,8 +164,14 @@
             span = append(span, a); // füge im span-Tag das a-Tag hinten hinzu
             p = append(p, span); // füge im p-Tag das span-Tag hinten hinzu
             append(doc.body, p); // füge document.body das p-Tag hinten hinzu
+        },
+        ende: 'ende'
+    };
+}(window, document));
 
-/* 
+
+/* ============================================
+insert_last_modified mit orginal-dom-funktionen: 
 // erzeuge ein leeres p-Tag-Objekt
 p = doc.createElement('p');
 
@@ -124,9 +208,3 @@ p.appendChild(pre);
 //füge document.body das p-Tag hinten hinzu
 doc.body.appendChild(p);
 */
-
-        },
-
-        ende: 'ende'
-    };
-}(this, document));

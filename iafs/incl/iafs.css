@@ -1,38 +1,106 @@
-html, body {
-line-height:24px;
-font-size:16px;
-font-size:medium;
-color:#fff; 
-background-color: #004;
-padding: 8px 36px 0px 36px;
+﻿html, body {
+font-size:15px;line-height: 18px;
+color:#fff;background-color: #004;
+padding: 4px 60px 0px 60px;
 margin: 0px;
 }
 
-a {
+* {margin:0;padding:0;}
+h1 {margin:0px 0px 8px 0px;padding:0px;
+background-color:#004;color:#aa9;text-align:center;
+font-weight:bold;text-shadow: 1px 2px 3px #aad, 2px 3px 4px #88a;
+}
+
+a,.a {float:left;line-height: 19px !important;
 text-decoration: none;
-border: 1px solid #004;
+border: 1px solid #557;
 background-color:#004;
 color: #eee;
 padding:0px 4px 0px 4px;
 }
 
-a:hover, a:active, a:focus, a:hover { 
+a:hover, a:active, a:focus, a:hover
+ { 
  text-decoration: none;
  color: #fff; 
  background-color:#339;
  border: 1px solid #ccc;
 }
 
-a[target]:after {
- content:"◥ ";
- color:#aaa;
-} 
-textarea {width:99%;padding: 0px;margin: 0px;font:12px 'Courier New',monospace;}
-.small {font-size:medium;}
+a[target]:after {content:"◥ ";color:#aaa;} 
+textarea {width:99%;font:12px 'Courier New',monospace;}
+form {clear:both !important;width:100%;}
+
+.span_select { float:left;font-size:12px; border:none; /* border:2px solid #557; */
+}
+.select {  display:inline;float:left;overflow:hidden;cursor:pointer;
+  font-size:12px;background:#004;color:#fff;
+  margin-left:1px !important;border:none;
+}
+.div_block {clear:both !important;width:100% !important;padding:0px !important;margin:4px 0px 0px 0px;}
+.div_menu_left {float:left;width:100px;overflow:hidden;text-align:center;margin-left:-108px !important;}
+.menu_left {float:left;width:86px;overflow:hidden;margin:0px;}
+.menu_titel {float:left;width:86px;overflow:hidden;margin:0px;
+text-align:center;background-color:#004;color:#aa9;padding:0px 4px 0px 5px;
+/*font-weight:bold;font-size:10px;padding-top:4px;text-shadow: 1px 1px 3px #aad;*/
+}
+
+.menu_label {float:left;overflow:hidden;font-weight:bold;text-shadow: 1px 1px 3px #aad;padding:0px 4px 0px 4px;}
+
+
+.float_clear {clear:both !important;}
+.float_left {float:left !important;}
+.float_hidden {float:left !important;overflow:hidden !important;}
+.w13{width:13px;}
+.w16{width:16px;}
+.w20{width:20px;}
+.w30{width:30px;}
+.w40{width:38px;}
+.w80{width:80px;}
+.w120{width:120px;}
+.w160{width:160px;}
+.w200{width:200px;}
+.w240{width:240px;}
+.w280{width:280px;}
+.w99{width:99%;}
+
 .center {text-align:center;}
-.inline {display:inline;}
-.border {border: 1px solid #88a;}
-.gelb {color: #ffc;background-color:#004;}
-.p3 {padding:3px;}
-.p6 {padding:6px;}
-.m3 {margin:3px;}
+.small {font-size:medium;}
+.display_inline {display:inline;}
+.display_block {display:block;}
+.display_none {display:none;}
+.border {border: 1px solid #557;}
+.border2 {border: 2px double #557;}
+.border_none {border: 1px solid #004  !important;border: none !important;}
+.blau {color: #ffc;background-color:#77a;}
+.blau1 {color: #ffc;background-color:#99a;}
+.black {color: #ccc;background-color:#000;}
+
+.p05 {padding:0px 5px !important;}
+.p03 {padding:0px 3px !important;} 
+.p01 {padding:0px 1px !important;} 
+.p0 {padding:0px !important;}    
+ 
+.mt3 {margin-top:3px !important;}
+.mt5 {margin-top:5px !important;}
+.m03 {margin:0px 3px !important;}
+.m01 {margin:0px 1px !important;}
+.m0 {margin:0px !important;}
+.m_1 {margin:-1px !important;}
+.m_2 {margin:-2px !important;}
+
+.font0 {font-size: 0px !important;}
+.font8 {font-size: 8px !important;line-height: 8px !important;}
+.font9 {font-size: 9px !important;line-height: 9px !important;}
+.font10 {font-size: 10px !important;line-height: 10px !important;}
+.font11 {font-size: 11px !important;line-height: 11px !important;}
+.font12 {font-size: 12px !important;line-height: 12px !important;}
+.font13 {font-size: 13px !important;line-height: 13px !important;}
+.font14 {font-size: 14px !important;line-height: 14px !important;}
+.font15 {font-size: 15px !important;line-height: 15px !important;}
+.font16 {font-size: 16px !important;line-height: 16px !important;}
+.font20 {font-style: normal !important;font-size: 20px !important;}
+.font24 { font:italic bold 24px/24px arial, helvetica, sans-serif !important;}
+.font32 {font-style: normal !important;font-size: 32px !important;}
+
+
