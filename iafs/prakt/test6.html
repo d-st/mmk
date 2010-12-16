@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<title>iafs templates</title>
+<link rel="stylesheet" href="../incl/iafs.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript" src="../data/data_html1.js"></script>
+<script type="text/javascript" src="../data/data_css1.js"></script>
+
+<script type="text/javascript" src="../incl/debug.js"></script>
+<script type="text/javascript" src="../incl/visuell.js"></script>
+<script type="text/javascript" src="../incl/dom.js"></script>
+<script type="text/javascript" src="../incl/local.js"></script>
+
+<script type="text/javascript" src="../incl/templates.js"></script>
+<script>
+
+  var ID = { form1: 'FORM1', editor1: 'EDITOR1', sel1: 'SELECT1',
+    form2: 'FORM2', editor2: 'EDITOR2', sel2: 'SELECT2',
+             w3c_textarea: 'fragment',  body: 'body' };
+
+           function build_template_array(str) {
+var i, step = 1, begrenzend = [, '",\n""', '"'],
+tennzeichen = 'o]0[O',  arr = str.split(tennzeichen);
+for (i = 0; i < arr.length; i += step) {
+  arr[i] = escape(arr[i]).replace(/%0D/ig,''); // Windows \r kann weg
+  arr[i] = '"' + arr[i] + begrenzend[step];
+} return "[\u000a\"void(0)\",\"titel\",\u000a" + arr.join(",\u000a") + '\u000a]\u000a';
+}
+var html_test_string1 = data_html1[2];
+
+window.onload = function () {
+  local.init();
+}
+</script>
+<style type="text/css">
+</style>
+</head><body id="body"><noscript>Diese Seite braucht Browser mit aktivierten JavaScript</noscript>
+
+<h1>iafs templates</h1>
+
+<br />
+
+<form id="FORM1" class="div_block;" action="javascript:alert('aktion ausführen?');" onsubmit="return false;">
+
+
+<div class="div_menu_left display_block">
+<span class="menu_left borden_none"> &nbsp;&nbsp; Editor ➊</span>
+<br class="float_clear" />
+
+<a class="menu_left blau1" href="javascript:visuell.popup(dom.get_string(ID.editor1));"
+   title="Zeigt den Editor-Quelltext als HTML-Seite an"> &nbsp;&nbsp;anzeigen◥
+</a><br class="float_clear" />
+<a class="menu_left" href="javascript:dom.set_string(ID.editor1,unescape(html_test_string1));dom.set_focus(ID.editor1);"
+  title="Ein HTML5-TestString überschreibt den Editor-Inhalt"> Test-String
+</a><br class="float_clear" />
+<a class="menu_left" href="javascript:dom.set_string(ID.w3c_textarea,dom.get_string(ID.editor1));dom.get_object('w3c_form').submit();"
+   title="Zum Validieren des Editor-Source-Textes wird http://validator.w3.org/#validate_by_input verwendet">validieren◥
+</a><br class="float_clear" />
+
+<a class="menu_left w40 mt5" href="javascript:dom.select_string(ID.editor1);"
+  title="Markiert den gesamten Editor-Text"> select editor1</a>
+<a class="menu_left w40 mt5" href="javascript:dom.set_string(ID.editor1,'');dom.set_focus(ID.editor1);"
+  title="Löscht den Editor-Text"> delete editor1
+</a><br class="float_clear" />
+<a class="menu_left w40" href="javascript:local.push_item(ID.editor1,dom.get_string(ID.editor1));dom.set_focus(ID.editor1);"
+  title="Der Editor-Text wird ge-push-ed. Verwendet wird local.push_item(ID.editor1, 'Editortext')"> push item
+</a>
+<a class="menu_left w40" href="javascript:dom.set_string(ID.editor1,local.pop_item(ID.editor1));dom.set_focus(ID.editor1);"
+  title="Der lokal gespeicherte Editor-Text überschreibt den Editor-Inhalt. Verwendet wird local.pop_item(ID.editor1)"> pop<br />item
+</a><br class="float_clear" /> 
+<!--
+<span class="menu_titel">Anzeigen</span>
+-->
+</div>
+<textarea class="textarea" id="EDITOR1" rows="25" cols="80"></textarea>
+</form>
+
+
+<form class="div_block;" action="javascript:alert('aktion ausführen?');" onsubmit="return false;">
+<div class="div_menu_left display_block">
+<a class="menu_left font15" href="javascript:void(0);" 
+   onclick="dom.get_object(ID.editor1).rows='15';dom.get_object(ID.editor2).rows='15';visuell.show(ID.form2);return false;"
+   title="Benutze einem 2. Editor als 'Zwischenablage'">use ➋</a>
+</div>
+
+<a class="menu_left font16 w20 border center" href="javascript:dom.set_string(ID.editor2,dom.get_string(ID.editor1));"
+   title="editor1 überschreibt editor2">↧</a>
+<a class="menu_left font16 w20 border center" href="javascript:var s2=dom.get_string(ID.editor2);dom.set_string(ID.editor2,dom.get_string(ID.editor1));dom.set_string(ID.editor1,s2);"
+   title="Tausche die Inhalte von editor1 und editor2">⇅</a>
+<a class="menu_left font16 w20 border center" href="javascript:dom.set_string(ID.editor1,dom.get_string(ID.editor2));"
+   title="editor1 überschreibt editor2">↥</a>
+
+<span class="menu_label font16 w160 center" title="Manipuliere Editor1-Text. Ergebnis überschreibt Editor1">Editor ➊: </span>
+<span class="span_select"><select class="select w120"
+ size="1" onchange="try{eval(this.options[this.selectedIndex].value);this.selectedIndex=0;}catch(e){alert(e);}">
+<option value="void(0)"> localStorage </option>
+<optgroup label="delete LocalStorage ...">
+<option value="local.delete_item(ID.editor1);dom.set_focus(ID.editor1);">lösche alle gepushte Editor1-Strings mit Hilfe local.delete_item(ID.editor1)</option>
+<option value="local.delete_all();dom.set_focus(ID.editor1);">lösche den gesamten localStorage mit Hilfe local.delete_all()</option>
+</optgroup><optgroup label="build Template von Hand">
+<option value="dom.set_string(ID.editor1,local.get_item(ID.editor1));dom.set_focus(ID.editor1);">editor1 := ge-push-tes (incl splitChar o]0[O)  </option>
+<option value="dom.set_string(ID.editor1,build_template_array(dom.get_string(ID.editor1)));"> array := editor1-split bei splitChar o]0[O und encode </option>
+</optgroup></select></span>
+
+
+<span class="span_select"><select class="select w160"
+ size="1" onchange="try{eval(this.options[this.selectedIndex].value);this.selectedIndex=0;}catch(e){alert(e);}">
+<option value="void(0)"> encode/decode(editor) </option>
+<optgroup label="%-Encoding" class="blau">
+<option value="dom.set_string(ID.editor1,escape(dom.get_string(ID.editor1)).replace(/%0D/ig,''));">↺ editor1:=escape(editor1-string ohne \r) </option>
+<option value="dom.set_string(ID.editor1,unescape(dom.get_string(ID.editor1)));">↺ editor1:=unescape(editor1) </option>
+</optgroup><optgroup label="encodeURI">
+<option value="dom.set_string(ID.editor1,encodeURI(dom.get_string(ID.editor1)));">↺ editor1:=encodeURI(editor1) </option>
+<option value="dom.set_string(ID.editor1,decodeURI(dom.get_string(ID.editor1)));">↺ editor1:=decodeURI(editor1) </option>
+</optgroup><optgroup label="encodeURIComponent">
+<option value="dom.set_string(ID.editor1,encodeURIComponent(dom.get_string(ID.editor1)));">↺ editor1:=encodeURIComponent(editor1) </option>
+<option value="dom.set_string(ID.editor1,decodeURIComponent(dom.get_string(ID.editor1)));">↺ editor1:=decodeURIComponent(editor1) </option>
+</optgroup><optgroup label="utf8-Encoding">
+<option value="dom.set_string(ID.editor1,crypt.encode_utf8(dom.get_string(ID.editor1)));">↺ editor1:=crypt.encode_utf8(editor1) </option>
+<option value="dom.set_string(ID.editor1,crypt.decode_utf8(dom.get_string(ID.editor1)));">↺ editor1:=crypt.decode_utf8(editor1) </option>
+</optgroup><optgroup label="base64-Encoding">
+<option value="dom.set_string(ID.editor1,crypt.encode_base64(dom.get_string(ID.editor1)));">↺ editor1:=crypt.encode_base64(editor1) </option>
+<option value="dom.set_string(ID.editor1,crypt.decode_base64(dom.get_string(ID.editor1)));">↺ editor1:=crypt.decode_base64(editor1) </option>
+</optgroup></select></span>
+
+
+<span class="span_select"><select class="select w120"
+ size="1" onchange="try{eval(this.options[this.selectedIndex].value);this.selectedIndex=0;}catch(e){alert(e);}">
+<option value="void(0)" title="Es können einige Debug-Funktionen verwendet werden"> debug </option>
+<optgroup label="Einige Test-Strings für den Editor1">
+<option value="dom.set_string(ID.editor1,unescape(html_test_string1))"
+ title="Ein HTML5-TestString überschreibt den Editor-Inhalt">↥ Editor1:=HTML5-TestString1 </option>
+<option value="dom.set_string(ID.editor1,unescape('%3Cscript%3E%20//%20try%20wegen%20FF-error%200x80004001%0A%0Avar%20str_von%20%3D%20function%20str_von%28obj%29%20%7B%0A%20%20%20var%20key%2C%20obj_name%20%3D%20obj%5B%27nodeName%27%5D%20%7C%7C%20obj.toString%28%29%2C%0A%20%20%20s%20%3D%20%22%5CnMember%20von%20%22%20+%20obj_name%20+%22%3A%22%3B%0A%20%20%20%0A%20%20%20for%28key%20in%20obj%29%20%7B%0A%20%20%20%20%20try%7B%0A%20%20%20%20%20%20%20if%28%20/*%20obj.hasOwnProperty%28key%29%20%26%26%20*/%20typeof%28%20obj%5Bkey%5D%29%20%21%3D%3D%20%27function%27%20%29%20%7B%20%0A%20%20%20%20%20%20%20%20%20%20%20s%20+%3D%20%22%5Cn%22%20+%20obj_name%20+%22.%22%20+%20key%20+%20%22%20%3D%20%22%20+%20obj%5Bkey%5D%3B%20%0A%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%7Dcatch%28e%29%7B%7D%3B%0A%20%20%20%7D%20return%20s%3B%0A%7D%3B%0A%0Awindow.onload%20%3D%20function%28%29%20%7B%0A%20%20var%20s%20%3D%20%27%3Cpre%3E%27+str_von%28document%29%20+%27%3C%5C/pre%3E%27%3B%0A%20%20document.getElementById%28%27body%27%29.innerHTML%3Ds%3B%0A%7D%0A%3C/script%3E%0A%3Cbody%20id%3D%22body%22%3E%0A%3C/body%3E'))"
+ title="Ein script-TestString überschreibt den Editor-Inhalt">↥  Editor1:=script-TestString1 </option>
+</optgroup><optgroup label="debug">
+<option value="alert(dom.get_string(ID.editor1).length);" title=""> Editor1String.length </option>
+<option value="debug.show(ID.body);" title="zeige innerHTML von ID.body an"> (ID.body).innerHTML </option>
+<option value="dom.set_string(ID.editor1,dom.get_string(ID.editor1).match(/[^<>]+|<(\/?)(A-Za-z]+)([^<>]*)>/g))" title=""> str.match(/[^<>]+|<(\/?)(A-Za-z]+)([^<>]*)>/g) </option>
+
+
+<!--
+<option value="dom.set_string(ID.editor1,dom.get_string(ID.editor1).match(/<.*?[^/]>/g).sort())" title=""> str.match(/<.*?[^/]>/g).sort() </option>
+
+escapable
+/[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/
+alert(/!-\/:-@\[-`{-~/g.test(dom.get_string(ID.editor1))); editor1 enthält nur ascii
+??? re=/\"(?:\\.|[^\\\"])*\"/g;
+/^[^<]*(<(.|\s)+>)[^>]*$|^#([a-zA-Z][\w-_\.\:]+)$/
+/^(?:[^<]*(<[\w\W]+>)[^>]*$|#([\w\-]+)$)/
+-->
+<option value="var a=dom.get_string(ID.editor1).split('\u000a');dom.set_string(ID.editor1,a.sort().join('\u000a'));">↺ sortiere zeilenweise </option>
+<option value="var s='\n'+dom.get_string(ID.editor1),i=0;dom.set_string(ID.editor1,s.replace(/\u000a/g,function(){return '\u000a'+(i++)+' ';}));">↺ numeriere zeilen </option>
+</optgroup></select></span>
+<br class="float_clear" />
+</form>
+
+
+<form id="FORM2" class="div_block display_none" action="javascript:alert('aktion ausführen?');" onsubmit="return false;">
+<div class="div_menu_left">
+<a class="menu_left blau1" href="javascript:visuell.popup(dom.get_string(ID.editor2));"
+   title="Zeigt den Editor-Quelltext als HTML-Seite an"> &nbsp;&nbsp;anzeigen◥
+</a><br class="float_clear" />
+<a class="menu_left w40" href="javascript:dom.select_string(ID.editor2);"
+  title="Markiert den gesamten Editor-Text"> select editor2 </a>
+<a class="menu_left w40" href="javascript:dom.set_string(ID.editor2,'');dom.set_focus(ID.editor1);"
+  title="Löscht den Editor-Text"> delete editor2
+</a><br class="float_clear" />
+
+<a class="menu_left w40" href="javascript:local.push_item(ID.editor1,dom.get_string(ID.editor2));dom.set_focus(ID.editor2);"
+  title="Der Editor-Text wird ge-push-ed. Verwendet wird local.push_item(ID.editor1, 'Editortext')"> push<br /> item
+</a>
+<a class="menu_left w40" href="javascript:dom.set_string(ID.editor2,local.pop_item(ID.editor1));dom.set_focus(ID.editor2);"
+  title="Der lokal gespeicherte Editor-Text überschreibt den Editor-Inhalt. Verwendet wird local.pop_item(ID.editor1)"> pop<br />item
+</a><br class="float_clear" />
+<a class="menu_left w40" href="javascript:local.delete_item(ID.editor1);dom.set_focus(ID.editor1);"
+  title="lösche alle gepushte Editor1-Strings mit Hilfe local.delete_item(ID.editor1)"> delete ALL
+</a>
+<a class="menu_left w40" href="javascript:void(0);" onclick="local.pop_item(ID.editor1,-1);return false;"
+  title="Der lokal gespeicherte Editor-Text überschreibt den Editor-Inhalt. Verwendet wird local.pop_item(ID.editor1)"> delete<br />item
+</a><br class="float_clear" />
+<a class="menu_left font15 mt5 blau1" href="javascript:void(0);" onclick="dom.get_object(ID.editor2).rows='5';dom.get_object(ID.editor1).rows='28';visuell.hide(ID.form2);return false;"
+   title="">hide ➋
+</a><br class="float_clear" />
+</div>
+<textarea class="textarea" id="EDITOR2" rows="10" cols="80"></textarea>
+<br class="float_clear" />
+
+<select id="SELECT2" size="1" onchange="try{dom.set_string(ID.editor2,unescape(this.options[this.selectedIndex].value));this.selectedIndex=0;}catch(e){alert(e);}">
+</select>
+<a href='javascript:dom.insert_options(ID.sel2,data_html1);visuell.show(ID.form2);' 
+   title="">load HTML Templates</a>
+<a href='javascript:dom.insert_options(ID.sel2,data_css1);visuell.show(ID.form2);' 
+   title="">load CSS Templates</a>
+</form>
+
+<div>
+<a href='javascript:templates.new();' title="">Schablonensammlung leeren</a>
+<a href='javascript:templates.append(dom.get_string(ID.editor1));' title="">dies als Schablone zur Sammlung hinzufügen</a>
+<a href='javascript:dom.set_string(ID.editor1, templates.load());' title="">Schablonensammlung anfertigen</a>
+</div>
+
+<form style="display:none;" id='w3c_form' method = "post" enctype = "multipart/form-data" action="http://validator.w3.org/check" target = "_blank">
+ <textarea cols="80" rows="5" name="fragment" id="fragment"></textarea>
+</form>
+
+</body>
+</html>
